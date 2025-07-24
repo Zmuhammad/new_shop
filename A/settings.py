@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from django.core.files.storage import storages
+from django.core.files.storage import default_storage
+import logging
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +47,10 @@ INSTALLED_APPS = [
     'storages',
 
 ]
+
+
+# print("INSTALLED_APPS:", INSTALLED_APPS)
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,14 +91,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-# STORAGES = {
-#     "default": {
-#         "BACKEND": "storages.backends.s3.S3Storage",
-
-#         },
-#     }
-
 
 
 # Password validation
@@ -133,25 +134,52 @@ STATICFILES_DIRS =[
 
 
 
-#Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-#arvan cloud storages
 
 
-AWS_ACCESS_KEY_ID ='fcce29d5-df47-4c54-8869-ea079d66875f'
-AWS_SECRET_ACCESS_KEY = '1e69f5b5c400d28289a7ed4c42cf752dbf52f90db727c162ce3c2b869fdfac01'
-AWS_S3_ENDPOINT_URL = 'https://s3.ir-thr-at1.arvanstorage.com'
-AWS_STORAGE_BUCKET_NAME = 'zmux'
+#Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
-AWS_SERVICE_NAME = 's3'
-AWS_S3_FILE_OVERWRITE = False
+
+#ArvanCloud S3 credentials and configuration
+# storages.backends
+# {
+#     'default': {'BACKEND': 's3boto3.S3Boto3Storage',},
+# }
+
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+STORAGES = {
+
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "OPTIONS": {
+            "access_key": "fcce29d5-df47-4c54-8869-ea079d66875f",
+            "secret_key": "1e69f5b5c400d28289a7ed4c42cf752dbf52f90db727c162ce3c2b869fdfac01",
+            "bucket_name": "zmux",
+            "endpoint_url": "https://s3.ir-thr-at1.arvanstorage.ir",
+        },
+    },
+
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
+
+# AWS_ACCESS_KEY_ID = 'fcce29d5-df47-4c54-8869-ea079d66875f'
+# AWS_SECRET_ACCESS_KEY = '1e69f5b5c400d28289a7ed4c42cf752dbf52f90db727c162ce3c2b869fdfac01'
+# AWS_S3_ENDPOINT_URL = 'https://s3.ir-thr-at1.arvanstorage.ir'
+# AWS_STORAGE_BUCKET_NAME = 'zmux'
+
+# AWS_QUERYSTRING_AUTH = False 
+# AWS_DEFAULT_ACL = None    
+
+print(default_storage.__class__.__name__)
