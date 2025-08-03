@@ -26,6 +26,12 @@ class Bucket :
             return result['Contents']
         else:
             return None
+        
+
+    def delete_object (self , key):
+        self.conn.delete_object(Bucket = 'zmux' , Key = key)
+        return True
+    
     
 
 bucket = Bucket()
