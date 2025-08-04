@@ -6,8 +6,6 @@ from django.contrib import messages
 from utils import *
 
 
-# all_bucket_objects_task , delete_object_task , download_object_task
-
 
 # Create your views here.
 
