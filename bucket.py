@@ -32,6 +32,11 @@ class Bucket :
         self.conn.delete_object(Bucket = 'zmux' , Key = key)
         return True
     
+
+    def download_object(self , key):
+        with open (settings.AWS_LOCAL_STORAGE + key , 'wb' ) as f:
+            self.conn.download_fileobj('zmux' , key , f )
+    
     
 
 bucket = Bucket()

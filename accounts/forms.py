@@ -62,8 +62,11 @@ class UserRegisterationForm(forms.Form):
 
 
 
-class VerifyCodeForm (forms.Form):
+class VerifyCodeForm ():
     code = forms.IntegerField()
 
-                                    
-        
+                                
+
+class UserLoginForm(forms.Form):
+    phone = forms.CharField(max_length=11)
+    password = forms.CharField(label = 'password' , widget=(forms.PasswordInput))

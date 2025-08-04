@@ -1,10 +1,12 @@
 from django.shortcuts import render , redirect
 from django.views import View 
-from .forms import UserRegisterationForm , VerifyCodeForm
+from .forms import UserRegisterationForm , VerifyCodeForm , UserLoginForm
 from .models import User,OtpCode
 from django.contrib import messages
 import random
 from utils import SendOtpCode
+from django.contrib.auth import login , logout , authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -68,3 +70,34 @@ class UserRegisterationVerifyCodeView(View):
                 return redirect ('account:verify_code')
             
         return redirect ('home:home')
+    
+
+class UserLoginView(View):
+    form_class = UserLoginForm
+    template_name = 'accounts/login.html'
+
+    def get (self , request):
+        form = self.form_class
+        return render (request , self.template_name , {'form' : form})
+
+    def post(self , request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(request, phone_number = cd['phone'] , password = cd['password'])
+            if user is not None:
+                login(request , user)
+                messages.success (request , 'logging in successfully' , 'info')
+                return redirect ('home:home')
+            else:
+                messages.error(request , 'phone number or password is wrong', 'info')
+            
+            return render (request , self.template_name , {'form' : form})
+        
+
+class UserLogoutView(LoginRequiredMixin , View):
+    def get(self , request):
+        logout(request)
+        messages.success (request , 'logging out successfully' , 'info')
+        return redirect('home:home')
+    

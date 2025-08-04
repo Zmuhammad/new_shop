@@ -28,9 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-t^or3tom*^jq_m_p&!9t1w0z!s01qyo88d1cy@+e^z_*140w7c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -140,6 +140,9 @@ STATICFILES_DIRS =[
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+AUTH_USER_MODEL = 'accounts.User'
+
+
 
 
 #Media files
@@ -174,6 +177,9 @@ STORAGES = {
     },
 }
 
+AWS_LOCAL_STORAGE = f'{BASE_DIR}/aws/'
+
+
 # AWS_ACCESS_KEY_ID = 'fcce29d5-df47-4c54-8869-ea079d66875f'
 # AWS_SECRET_ACCESS_KEY = '1e69f5b5c400d28289a7ed4c42cf752dbf52f90db727c162ce3c2b869fdfac01'
 # AWS_S3_ENDPOINT_URL = 'https://s3.ir-thr-at1.arvanstorage.ir'
@@ -182,4 +188,4 @@ STORAGES = {
 # AWS_QUERYSTRING_AUTH = False 
 # AWS_DEFAULT_ACL = None    
 
-print(default_storage.__class__.__name__)
+# print(default_storage.__class__.__name__)
