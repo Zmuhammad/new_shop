@@ -1,7 +1,8 @@
-from celery import Celery
+#from celery import Celery
 from .celery_conf import celery_app
 
-celery_app = Celery('A')
+# celery_app = Celery('A')
+#import accounts.tasks
 
 
 

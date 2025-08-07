@@ -21,7 +21,7 @@
 
     {% for product in products %}
 
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem; display:inline-block" >
             <a href = "{{product.get_absolut_url}}" class="card-title">{{product.name}}</a> 
             <img class="card-img-top" src="{{product.image.url}}" alt="...">
             

@@ -38,7 +38,7 @@ class UserRegisterationView (View):
             return redirect ('account:verify_code')
         
         else:
-            return render(request , 'accounts/register.html')
+            return render(request , 'accounts/register.html', {'form' : form})
 
 
 

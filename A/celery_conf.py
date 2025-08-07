@@ -1,6 +1,8 @@
+from __future__ import absolute_import
 from celery import Celery
 from datetime import timedelta
 import os
+#from accounts import tasks
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE' , 'A.settings')
 
