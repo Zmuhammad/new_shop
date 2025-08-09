@@ -4,8 +4,11 @@ from django.urls import reverse
 
 # Create your models here.
 class Category(models.Model):
+    sub_category = models.ForeignKey('self' , on_delete=models.CASCADE , related_name= 'scategory' , null=True , blank=True)
+    is_sub = models.BooleanField(default=False)
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255 , unique=True)
+
 
     class Meta:
         ordering = ('name',)
@@ -14,10 +17,13 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('home:category_filter' ,  args= [self.slug,])
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
+    category = models.ManyToManyField(Category, related_name='products')
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
     image= models.ImageField()
@@ -33,5 +39,5 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
-    def get_absolut_url(self):
-        return reverse ('home:product_detail' , args= [self.slug,])
+    def get_absolute_url(self):
+        return reverse ('home:product_detail', args=[self.slug,] )
