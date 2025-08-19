@@ -21,6 +21,9 @@
               <a class="navbar-link active" href="{% url 'home:bucket' %}">Bucket</a>
 
               {% endif %}
+
+              <a class="navbar-link active" href="{% url 'orders:cart' %}">CART {{cart | length}}</a>
+
           
          </div>
     </div>

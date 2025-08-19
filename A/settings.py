@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     'Home.apps.HomeConfig',
     'accounts.apps.AccountsConfig',
+    'orders.apps.OrdersConfig',
 
 
     'storages',
@@ -78,6 +79,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'orders.context_processors.cart',
             ],
         },
     },
@@ -193,3 +195,7 @@ AWS_LOCAL_STORAGE = f'{BASE_DIR}/aws/'
 # AWS_DEFAULT_ACL = None    
 
 # print(default_storage.__class__.__name__)
+
+#gateway configs
+MERCHANT = "978d9311-c497-413d-84cb-3860dcb4d166"
+SANDBOX = True

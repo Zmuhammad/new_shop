@@ -4,6 +4,7 @@ from .models import *
 from .tasks import * 
 from django.contrib import messages
 from utils import *
+from orders.forms import *
 
 
 
@@ -25,7 +26,8 @@ class HomeView(View):
 class ProductDetailView(View):
      def get (self , request , slug):
           product = get_object_or_404(Product, slug = slug)
-          return render(request , 'home/detail.html' , {'product':product})
+          form = CartAddForm()
+          return render(request , 'home/detail.html' , {'product':product , 'form':form})
      
 
 class BucketHome (IsAdminUserMixin , View):
@@ -33,8 +35,6 @@ class BucketHome (IsAdminUserMixin , View):
 
      def get (self , request):
           objects = all_bucket_objects_task()
-          print('-' * 100)
-          print(objects)
           return render (request , self.template_name ,{'objects':objects})
      
 
