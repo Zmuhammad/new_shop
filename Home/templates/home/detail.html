@@ -6,7 +6,7 @@
     <small>{{product.created}}</small>
     <p>{{product.price}} RIALS</p>
     <img src="{{product.image.url}}" alt="">
-    <p>{{product.description}}</p><br><br>
+    <p>{{product.description | safe }}</p><br><br>
 
     <form action="{% url 'orders:cart_add' product.id %}" method="post">
 

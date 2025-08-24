@@ -43,18 +43,25 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
+    #local apps
     'Home.apps.HomeConfig',
     'accounts.apps.AccountsConfig',
     'orders.apps.OrdersConfig',
 
-
+    #third parties apps
     'storages',
     'django_celery_beat',
+    'ckeditor',
 ]
 
 
-# print("INSTALLED_APPS:", INSTALLED_APPS)
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
+}
+
 
 
 MIDDLEWARE = [
@@ -93,10 +100,27 @@ WSGI_APPLICATION = 'A.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'shop',          # Database name you created
+        'USER': 'zmux81',       # Default PostgreSQL user
+        'PASSWORD': '4412',  # Password you set during installation
+        'HOST': '127.0.0.1',      # Or your PostgreSQL server IP
+        'PORT': '5432',           # Default PostgreSQL port
     }
 }
+
+
+
+#CACHE STORAGE CONFIGS
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
+}
+
+#  Use Redis for session storage
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 
 # Password validation

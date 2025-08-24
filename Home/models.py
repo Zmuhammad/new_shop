@@ -1,5 +1,6 @@
 from django.db import models 
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -27,7 +28,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
     image= models.ImageField()
-    description = models.TextField(blank=True)
+    description = RichTextField()
     price = models.IntegerField()
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
