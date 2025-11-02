@@ -1,6 +1,6 @@
 # This is a test project
 
-## attricutes :
+## attributes :
 
 ### custom user model
 ### filter product view
