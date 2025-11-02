@@ -1,8 +1,8 @@
-## This is a test project
+# This is a test project
 
-# attricutes :
+## attricutes :
 
-custom user model
-filter product view
-payment gateway(zarrinpal)
-...
+# custom user model
+# filter product view
+# payment gateway(zarrinpal)
+# ...
