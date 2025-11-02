@@ -2,7 +2,7 @@
 
 ## attricutes :
 
-# custom user model
-# filter product view
-# payment gateway(zarrinpal)
-# ...
+### custom user model
+### filter product view
+### payment gateway(zarrinpal)
+### ...
